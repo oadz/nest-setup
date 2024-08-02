@@ -19,12 +19,17 @@ export class UserService {
     return this.userRepository.find();
   }
 
-  // viewUser(id: number): Promise<User> {
-  //   return this.userRepository.findOneBy({ id });
-  // }
+  viewUser(id: number): Promise<User> {
+    console.log('id', id);
+    return this.userRepository.findOneBy({ userID: id });
+  }
 
   update(id: number, updateUserDto: UpdateUserDto) {
-    return `This action updates a #${id} user`;
+    const user: User = new User();
+    user.userID = id;
+    user.firstName = updateUserDto.firstName;
+    user.lastName = updateUserDto.lastName;
+    return this.userRepository.save(user);
   }
   a;
 
